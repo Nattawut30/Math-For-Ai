@@ -157,3 +157,69 @@ joint_likelihood = math.exp(joint_likelihood)
 # Nevertheless, We are trying to maximize rather than minimize, we add each adjustment to B0 and B1 rather than subtract like in least squares.
 
 """ 5. Multivariable Logistic Regression """
+
+# We are dealing with multiple dimensions, it is going to be hard to visualize the curvy hyperplane
+# that is our logistic curve. so we will steer clear from visualization.
+
+# 10.6: Doing a multivariable logistic regression on employee data
+import pandas as pd
+from sklearn.linear_model import LogisticRegression
+
+employee_data = pd.read_csv("https://tinyurl.com/y6r7qjrp")
+
+inputs = employee_data.iloc[:, :-1]
+
+output = employee_data.iloc[:, -1]
+
+fit = LogisticRegression(penalty=None).fit(inputs, output)
+
+print("COEFFICIENTS: [0]".format(fit.coef_.flatten()))
+print("INTERCEPT: [0]".format(fit.intercept_.flatten()))
+
+def predict_employee_will_stay(sex, age, promotions, years_employed):
+    prediction = fit.predict([[sex, age, promotions, years_employed]])
+    probabilities = fit.predict_proba([sex, age, promotions, years_employed])
+    if prediction == [[1]]:
+        return "WILL LEAVE: {0}".format(probabilities)
+    else:
+        return "WILL STAY: {0}".format(probabilities)
+
+while True:
+    n = input("Predict employee will stay or leave {sex}," \
+            "{age}, {promotions}, {years_employed}: ")
+    (sex, age, promotions, years_employed) = n.split(",")
+    print(predict_employee_will_stay(int(sex), int(age), int(promotions),
+                                     int(years_employed)))
+
+# a 34-year-old employee with 1 promotion and 5 years, employment will quit
+# Real life is not always this clean
+
+# Be caref ul makeing classifications on people
+# Input variables like race and gender can become weighted from machine learning training
+# As data privacy laws continue to evolve, it is advisable to err on the side of caustio and engineer personal data carefully
+
+# Data Scientists easily fall into traps analyzing only what data says, but not questioning where it came from and what assumptions are built into it
+# The best way to get answers to these question is to understand what the predictions are being used for.
+
+""" the Log-Odds """
+
+# Linear Function and scale its output to fall between 0 and 1
+# The log-odds, also called the logit function, lends itself to logistic regression for this purpose
+# This linear function being raied to e is know as the log-odds function, which takes the logarithm of the odds for the event of interest.
+
+# When we wrap the odds function in a natural logarithm (a logarithm base e)
+# we call this the logit function, the output of this formula is what we call the log-odds
+# we take the logarithm of the odds
+
+# When we are in "log-odds land" it is easier to compare one set of odds against another.
+# We treat anything greater than 0 as favoring odds an event will happen, whereas anything less than 0 is against an event.
+
+
+# Odds are against an event when it is between 0.0 and 1.0 but anything greater than 1.0 favors the event and extends into positive infinity
+# Every logistic regression is actually backed by a linear functionm and that linear function is a log-odds function
+# Another benefit we get looking at the logistic regression from an odds perspective is we can compare the effect between one x-value and another.
+
+# Recalls: Chemecial exposure
+# Set the 2 odds against each other as an odds ratio,
+# where the odds for eight hours is the numerator and the odds for six hours is in the denominator
+# Value of approximately 3.996, meaning that our odds of showing symptoms increases by nearly a factor of 4 with an extra 2 hours of exposure
