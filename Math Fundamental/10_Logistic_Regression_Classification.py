@@ -223,3 +223,9 @@ while True:
 # Set the 2 odds against each other as an odds ratio,
 # where the odds for eight hours is the numerator and the odds for six hours is in the denominator
 # Value of approximately 3.996, meaning that our odds of showing symptoms increases by nearly a factor of 4 with an extra 2 hours of exposure
+
+# Odds = p / 1 - p
+# logit = log(p / 1 - p)
+# log-odds = B0 + B1^x
+# log(p / 1 - p) = B0 + B1^x
+# o = p / 1- p
