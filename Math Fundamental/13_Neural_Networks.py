@@ -104,3 +104,81 @@ plot(logistics)
 # 2. If you have multiple classification in the outputs, ue softmax for the output layer.
 
 """ 4. Forward Propagation """
+
+# Feed forward means we are simply inputting a color into the neutal network and seeing what it outputs
+
+# 13.3: A simple forward propagation network with random weight and bias values
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+
+all_data = pd.read_csv("https://tinyurl.com/y2qmhfsr")
+
+# Extract the input columns, scale down by 255
+all_inputs = (all_data.iloc[:, 0:3].values / 255.0)
+all_outputs = (all_data.iloc[:, -1].values)
+
+# Split train and test data sets
+X_train, X_test, Y_train, Y_test = train_test_split(all_inputs, all_outputs, test_size=1/3)
+n = X_train.shape[0] # Numbers of training records
+
+# Build neural network with weights and biases
+# With random initialization
+w_hidden = np.random.rand(3, 3)
+w_output = np.random.rand(1, 3)
+
+b_hidden = np.random.rand(3, 1)
+b_output = np.random.rand(1, 1)
+
+# Activation Functions
+relu = lambda x: np.maximum(x, 0)
+logistics = lambda x: 1 / (1 + np.exp(-x))
+
+# Runs inputs through the neural network to get predicted outputs
+def forward_prop(X):
+    Z1 = w_hidden @ X + b_hidden
+    A1 = relu(Z1)
+    Z2 = w_output @ A1 + b_output
+    A2 = logistics(Z2)
+    return Z1, A1, Z2, A2
+
+# Calculate Accuracy
+test_predictions = forward_prop(X_test.transpose())[3] # grab only output layer 42
+test_comparisons = np.equal((test_predictions >= .5).flatten().astype(int), Y_test)
+accuracy = sum(test_comparisons.astype(int) / X_test.shape[0])
+print("Accuracy: ", accuracy)
+
+# These are declaing out weights and biases for both the hidden and output layers of out neural network
+# Each node is represented as a row in a matrix. If ther are three nodes, there are three rows.
+# If there is one node, there is one row. Each column holds a weight value for that node.
+# Since there is one bias per node, there are going to be three rows of biases for the hidden layer and one row of biases for the output layer.
+
+# 13.4: The activation functions and forward propagation function for our neural network
+# Activation Functions
+relu = lambda x: np.maximum(x, 0)
+logistic = lambda x:1 / (1 + np.exp(-x))
+
+# Runs inputs through the neural network to get predicted outputs
+def forward_prop(X):
+    Z1 = w_hidden @ X + b_hidden
+    A1 = relu(Z1)
+    Z2 = w_output @ A1 + b_output
+    A2 = logistics(Z2)
+    return Z1, A1, Z2, A2
+
+# Thiscode is concisely executes our entire neural network using matrix multiplication and matrix-vector multiplication
+# 1 and 2 indicate the operations belong to layer 1 and 2 respectively
+# The "Z" indicates an unactivated output from the layer, and "A" is activated output from the layer.
+
+# Z1 = W[Hidden]^X + B[Hidden]
+# Just pass each value in that vector through the ReLu function and it will give us A1
+# Because all the values are positive, it should not have an impact.
+
+# A1 = ReLu(Z1)
+# Let's take that hidden layer output A1 and pass it through the final layer to get Z2
+
+# Z2 = W[Output]^A1 + B[Output]
+# Pass this single value in Z2 through the activation function to get A2
+
+# A2 = logistic(Z2)
+# the final output that predict whether the bg color is light1 or dark0 font
