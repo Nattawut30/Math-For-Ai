@@ -113,4 +113,78 @@ print(df) # prints SQL results as DataFrame
 # Even tangible, high profile, and specific projects can become mysterious buzzwords understood by a few but talked about by many
 
 # 1. Role Difinition
-# 
+# You always want to go into a role that is clearly defined and has tangible objectives.
+# Should have leadership with a clear vision that understands what the business needs.
+# If the department wants you for being "data-driven" or have a competitive edge in "data science" this is a red flag
+# Beware of hiring based on the buzzword
+
+# 2. Organizational Focus and Buy-In
+# How aligned the organizations is on specific objectives and whether all parties are bough in
+# Management creates a data science team but there's no clear objective
+
+# Leadership must have this:
+# 2.1: Have a clearly defined objective and road map
+# 2.2: Obtain budget to collect data and support the infrastructure
+# 2.3: Attain data access and negotiate data ownership
+# 2.4: Include stakeholder buy0in and domain knowledge
+# 2.5: Budget time and meeting from stakeholders.
+
+# Data Acess is Political!
+# If you are asking for access to their data, you are asking to get into their business
+
+# 3. Adequate Resources
+# Another risk to watch out for is not getting adequate resources to do your job.
+# It is difficult being thrown into a role and not having what you need.
+# Something can cost money and your organization may be unable to budget for them.
+
+# 4. Reasonable Objectives
+# The big one to watch out for.
+# Your first 18 months is mostly explaining to management why they have not delivered, because they are still trying to gather and clean data, which is 95% of ML efforts.
+# Unrealistic expectations.
+# They just traded one set of manual processes for another: the procurement of labeled data.
+# Find a way to manage expectations with management.
+
+# High-dollar management consultancies create more billable hours around "AI Strategy"
+# "LARPing"
+# They have no long-term stake in their customer's success.
+# Be a guy who selling shovels during a gold rush
+
+# So, Always be aware of this dynamic and always ask "cui bono?" = Who benefits?
+
+# 5. Competing with Existing Systems
+# The situation in work environment that lack things to do and need to look busy.
+# If the existing system you are competing with is broken and rudimentary or done completely manually without automation?
+# Run fast!
+
+# A bullshit job is paid employment that is so completely pointless, unnecessary or pernicious that even the employee cannot justify its exitence but has to pretend otherwise.
+# If you find yourself in a job not designed to create value, think strategically how you can influence postive change, or find a new opportunities.
+
+# 6. A Role Is NOT what you think
+# You can certainly accept your data scientist role turning into an IT role, and maybe get some database and programming skills in the process!
+# Become an advocate for change. Push to modernize the tooling, advocating using Python and a modern database platform like MySQL or SQLite.
+# Nasty politics can ensure when IT departments and non-IT departments clash, accusing each other of not staying in their lane or simply co-opting roles for job security.
+# Overall, If you find yourself in a shadow IT role, make sure you understand the risks and play nice with the IT department.
+
+# 7. Does Your Dream Job Not Exist?
+# Always check up your expectations too.
+# Keep your expectation realistic as you navigate the job market!
+# A data sciencetist is evolving to be a software engineer with proficiency in statistics, optimization, and ML
+# Consider others Role like: Computer Vision Engineer, Data Engineer, Data Analyst, Researcher, Operations Research Analyst, and Advisor/Consultant, or even a quants!
+
+# Summary:
+# 1. Pick a small piece of something and start there.
+# 2. Do something small. Learn something small. Build something small. Every single day!
+# 3. Understand why things work, not just how they work.
+# 4. Learn so you can match the right tools to the right problems and find the right solutions.
+# 5. Let it compounds. Never Stop learning and improving yourself.
+
+# Bonus - 16.3: Using SymPy to convert an expression into LaTex
+# you gonna use math a lot. I recommend using LaTex to write a high quality papers and equations on it.
+from sympy import *
+
+x, y = symbols('x y')
+z = x ** 2 / sqrt(2 * y ** 3 - 1)
+print(latex(z)) # \frac{x^{2}}{\sqrt{2 y^{3} - 1}}
+# You gonna write some research papers some day. So using LaTex is a great choice for producing a clear formulas and equations!
+
+# The End.
